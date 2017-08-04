@@ -17,8 +17,12 @@ char** GenerarBarcosJ1(char**, int);
 char** GenerarBarcosJ2(char**, int);
 //Generar barcos del jugador2
 
-bool VerificarCoordenada(char**, int, int);
+bool VerificarCoordenada(char**, int, int, int);
 // Verifica la coordenada ingresada
+
+char** NuevoTablero(char**, int, int, int);
+//Pone donde disparo el jugador
+
 int main(){
 	int size = 8;
 	char** Matrix = GenerarMatriz(8);
@@ -26,9 +30,11 @@ int main(){
 	int Turno = 1;
 	int cantidadcaracter = 0;
 	int CantidadBarcosJ1 = 0;
-	//while(TerminarTurno = 0){
+	int cantidadcaracter2 = 0;
+	int CantidadBarcosJ2 = 0;
+	while(TerminarJuego == 0){
 		Matrix = Tablero(Matrix, size);	
-		//ImpTablero(Matrix, 0, 0, size, size);
+		ImpTablero(Matrix, 0, 0, size, size);
 		char** MatrixJ1 = GenerarMatriz(8);
 		MatrixJ1 = GenerarBarcosJ1(MatrixJ1, 8);
 		//ImpTablero(MatrixJ1, 0, 0, 8, 8);
@@ -41,11 +47,10 @@ int main(){
 			int j;
 			cout<<"Ingrese Coordenada i: ";
 			cin>>i;
-			cout<<endl;
 			cout<<"Ingrese Coordenada j: ";
 			cin>>j;
-			bool VerCoor = VerificarCoordenada(MatrixJ1, i, j);
-			if(bool == true){
+			bool VerCoor = VerificarCoordenada(MatrixJ1, i, j, size);
+			if(VerCoor == true){
 				cout<<"Ha Disparado en una Parte de Barco"<<endl;
 				cantidadcaracter++;
 			}else{
@@ -53,13 +58,33 @@ int main(){
 			}
 			if(cantidadcaracter == 3){
 				CantidadBarcosJ1++;
-				catidadcaracter = 0;
+				cantidadcaracter = 0;
 			}
 			Turno = 2;
-		}else if(Turno == 2){
-				
+		}
+	       
+		if(Turno == 2){
+			cout<<"Turno J2"<<endl;
+			int i;
+			int j;
+			cout<<"Ingrese Coordenada i: ";
+			cin>>i;
+			cout<<"Ingrese Coordenada j: ";
+			cin>>j;
+			bool VerCoor2 = VerificarCoordenada(MatrixJ2, i, j, size);
+			if(VerCoor2 == true){
+				cout<<"Ha Disparado en una Parte de Barco"<<endl;
+				cantidadcaracter2++;
+			}else{
+				cout<<"Ha Fallado"<<endl;
+			}
+			if(cantidadcaracter2 == 3){
+				CantidadBarcosJ2++;
+				cantidadcaracter2 = 0;
+			}
+			Turno = 1;	
 		}//if/else if()
-	//}//while()
+	}//while()
 	return 0;
 }//main()
 
@@ -138,12 +163,13 @@ char** GenerarBarcosJ2(char** tablero, int size){
 	return tablero;
 }//GenerarBarcosJ2()
 
-bool VerificarCoordenada(char** tablero, int x, int y){
+bool VerificarCoordenada(char** tablero, int x, int y, int size){
 	for(int i=0; i<size; i++){
 		for(int j=0; j<size; j++){
 			if(i==x && j==y){
-				if(tablero[i][j] == '#';){
+				if(tablero[i][j] == '#'){
 					return true;
+					tablero[i][j] = '*';
 				}else{
 					return false;
 				}//if/else()
@@ -151,3 +177,7 @@ bool VerificarCoordenada(char** tablero, int x, int y){
 		}//for2()
 	}//for1()
 }//VerificarCoordenada()
+
+char** NuevoTablero(char** tablero, char** tablerojugador, int x, int y, int size){
+	
+}//NuevoTablero()
