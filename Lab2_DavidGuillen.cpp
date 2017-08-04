@@ -1,5 +1,6 @@
 #include <iostream>
-
+#include <ctime>
+#include <stdlib.h>
 using namespace std;
 
 char** GenerarMatriz(int);
@@ -24,11 +25,15 @@ char** NuevoTablero(char**, int, int, int);
 //Pone donde disparo el jugador
 
 int VerificarBarcoJ1(char**, int, int, int);
-//Verifica las vidas de los barcos
+//Verifica las vidas de los barcos del jugador1
 
 int VerificarBarcoJ2(char**, int, int, int);
+//Verificar las vidas de los barcos del jugador2
+
+void shots();
 
 int main(){
+	srand(time(NULL));
 	int size = 8;
 	char** Matrix = GenerarMatriz(8);
 	int TerminarJuego = 0;
@@ -90,6 +95,7 @@ int main(){
 				}
 				if(BarJ1_1 == 3 || BarJ1_2 ==3 || BarJ1_3 == 3 || BarJ1_4 == 3){
 					CantidadBarcosJ1++;
+					shots();
 				}
 				Turno = 2;
 				Matrix = NuevoTablero(Matrix, i, j, size);
@@ -131,12 +137,18 @@ int main(){
 				}
 				if(BarJ2_1 == 3 || BarJ2_2 ==3 || BarJ2_3 == 3 || BarJ2_4 == 3){
 					CantidadBarcosJ2++;
+					shots();
 				}
 				Turno = 1;
 				Matrix2 = NuevoTablero(Matrix2, i, j, size);
 				ImpTablero(Matrix2, 0, 0, size, size);
 			}	
 		}//ifJ2
+		if(CantidadBarcosJ1 == 5 || CantidadBarcosJ2 == 5){
+			cout<<"Ha Terminado el Juego"<<endl;
+			TerminarJuego = 1;
+		}
+
 	}//while()
 	return 0;
 }//main()
@@ -245,35 +257,60 @@ char** NuevoTablero(char** tablero, int x, int y, int size){
 int VerificarBarcoJ1(char** tablero, int x, int y, int size){
 	for(int i=0; i<size; i++){
 		for(int j=0; j<size; j++){
-			if(i == 1 && j>0 && j<4 && tablero[i][j] == '#'){
+			if(i == 1 && j>0 && j<4 && tablero[x][y] == '#'){
 				return 1;
-			}else if(i == size-1 && j>0 && j<4 && tablero[i][j] == '#'){
+			}else if(i == size-1 && j>0 && j<4 && tablero[x][y] == '#'){
 				return 2;
-			}else if(j == 4 && i>2 && i<6 && tablero[i][j] == '#'){
+			}else if(j == 4 && i>2 && i<6 && tablero[x][y] == '#'){
 				return 3;
-			}else if(j == size-1 && i>1 && i<5 &&tablero[i][j] == '#'){
+			}else if(j == size-1 && i>1 && i<5 &&tablero[x][y] == '#'){
 				return 4;
-			}else{
-				return 0;
 			}//if/else if()
 		}//for2()
 	}//for1()
+	return 0;
 }//VerificarBarcosJ1()
 
 int VerificarBarcoJ2(char** tablero, int x, int y, int size){
 	for(int i=0; i<size; i++){
 		for(int j=0; j<size; j++){
-			if(i == 1 && j>0 && j<4 && tablero[i][j] == '#'){
+			if(i == 1 && j>0 && j<4 && tablero[x][y] == '#'){
 				return 1;
-			}else if(i == size-1 && j>0 && j<4 && tablero[i][j] == '#'){
+			}else if(i == size-1 && j>0 && j<4 && tablero[x][y] == '#'){
 				return 2;
-			}else if(j == 4 && i>2 && i<6 && tablero[i][j] == '#'){
+			}else if(j == 4 && i>2 && i<6 && tablero[x][y] == '#'){
 				return 3;
-			}else if(j == size-1 && i>1 && i<5 &&tablero[i][j] == '#'){
+			}else if(j == size-1 && i>1 && i<5 &&tablero[x][y] == '#'){
 				return 4;
-			}else{
-				return 0;
 			}//if/else if()
 		}//for2()
 	}//for1()
+	return 0;
 }//VerificarBarcosJ1()
+
+void shots(){
+	int random = rand()%7;
+	switch(random){
+		case 1:
+			cout<<"Cheap_Tequila"<<endl;
+			break;
+		case 2:
+			cout<<"Jell-O"<<endl;
+			break;
+		case 3:
+			cout<<"Kamikaze"<<endl;
+			break;
+		case 4:
+			cout<<"MindEraser"<<endl;
+			break;
+		case 5:
+			cout<<"Bombs"<<endl;
+			break;
+		case 6:
+			cout<<"Fireballs"<<endl;
+			break;
+		case 7:
+			cout<<"Whiskey"<<endl;
+			break;
+	}//switch
+}//shots()
