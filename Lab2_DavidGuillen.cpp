@@ -32,15 +32,17 @@ int main(){
 	int CantidadBarcosJ1 = 0;
 	int cantidadcaracter2 = 0;
 	int CantidadBarcosJ2 = 0;
+	char** Matrix2 =GenerarMatriz(8);
+	Matrix2 = Tablero(Matrix2, size);
+	Matrix = Tablero(Matrix, size);	
+	ImpTablero(Matrix, 0, 0, size, size);
+	char** MatrixJ1 = GenerarMatriz(8);
+	MatrixJ1 = GenerarBarcosJ1(MatrixJ1, 8);
+	//ImpTablero(MatrixJ1, 0, 0, 8, 8);
+	char** MatrixJ2 = GenerarMatriz(8);
+	MatrixJ2 = GenerarBarcosJ2(MatrixJ2, 8);
+	//ImpTablero(MatrixJ2, 0, 0, 8, 8);
 	while(TerminarJuego == 0){
-		Matrix = Tablero(Matrix, size);	
-		ImpTablero(Matrix, 0, 0, size, size);
-		char** MatrixJ1 = GenerarMatriz(8);
-		MatrixJ1 = GenerarBarcosJ1(MatrixJ1, 8);
-		//ImpTablero(MatrixJ1, 0, 0, 8, 8);
-		char** MatrixJ2 = GenerarMatriz(8);
-		MatrixJ2 = GenerarBarcosJ2(MatrixJ2, 8);
-		//ImpTablero(MatrixJ2, 0, 0, 8, 8);
 		if(Turno == 1){
 			cout<<"Turno J1"<<endl;
 			int i;
@@ -61,7 +63,9 @@ int main(){
 				cantidadcaracter = 0;
 			}
 			Turno = 2;
-		}
+			Matrix = NuevoTablero(Matrix, i, j, size);
+			ImpTablero(Matrix, 0, 0, size, size);
+		}//ifJ1
 	       
 		if(Turno == 2){
 			cout<<"Turno J2"<<endl;
@@ -82,8 +86,10 @@ int main(){
 				CantidadBarcosJ2++;
 				cantidadcaracter2 = 0;
 			}
-			Turno = 1;	
-		}//if/else if()
+			Turno = 1;
+			Matrix2 = NuevoTablero(Matrix2, i, j, size);
+			ImpTablero(Matrix2, 0, 0, size, size);	
+		}//ifJ2
 	}//while()
 	return 0;
 }//main()
@@ -178,6 +184,13 @@ bool VerificarCoordenada(char** tablero, int x, int y, int size){
 	}//for1()
 }//VerificarCoordenada()
 
-char** NuevoTablero(char** tablero, char** tablerojugador, int x, int y, int size){
-	
+char** NuevoTablero(char** tablero, int x, int y, int size){
+	for(int i=0; i<size; i++){
+		for(int j=0; j<size; j++){
+			if(i==x && j==y){
+				tablero[i][j] = '+';
+			}
+		}//for2()
+	}//for1()
+	return tablero;
 }//NuevoTablero()
