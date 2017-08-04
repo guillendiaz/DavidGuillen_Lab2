@@ -64,32 +64,37 @@ int main(){
 			cin>>i;
 			cout<<"Ingrese Coordenada j: ";
 			cin>>j;
-			bool VerCoor = VerificarCoordenada(MatrixJ1, i, j, size);
-			if(VerCoor == true){
-				cout<<"Ha Disparado en una Parte de Barco"<<endl;
+			if(i>7 || j>7){
+				cout<<"Fuera de Rango";
 			}else{
-				cout<<"Ha Fallado"<<endl;
+				
+				bool VerCoor = VerificarCoordenada(MatrixJ1, i, j, size);
+				if(VerCoor == true){
+					cout<<"Ha Disparado en una Parte de Barco"<<endl;
+				}else{
+					cout<<"Ha Fallado"<<endl;
+				}
+				VerBarcoJ1 = VerificarBarcoJ1(MatrixJ1, i, j, size);
+				if(VerBarcoJ1 == 1){
+					BarJ1_1++;
+					VerBarcoJ1 = 0;
+				}else if(VerBarcoJ1 == 2){
+					BarJ1_2++;
+					VerBarcoJ1 = 0;
+				}else if(VerBarcoJ1 == 3){
+					BarJ1_3++;
+					VerBarcoJ1 = 0;
+				}else if(VerBarcoJ1 == 4){
+					BarJ1_4++;
+					VerBarcoJ1 = 0;
+				}
+				if(BarJ1_1 == 3 || BarJ1_2 ==3 || BarJ1_3 == 3 || BarJ1_4 == 3){
+					CantidadBarcosJ1++;
+				}
+				Turno = 2;
+				Matrix = NuevoTablero(Matrix, i, j, size);
+				ImpTablero(Matrix, 0, 0, size, size);
 			}
-			VerBarcoJ1 = VerificarBarcoJ1(MatrixJ1, i, j, size);
-			if(VerBarcoJ1 == 1){
-				BarJ1_1++;
-				VerBarcoJ1 = 0;
-			}else if(VerBarcoJ1 == 2){
-				BarJ1_2++;
-				VerBarcoJ1 = 0;
-			}else if(VerBarcoJ1 == 3){
-				BarJ1_3++;
-				VerBarcoJ1 = 0;
-			}else if(VerBarcoJ1 == 4){
-				BarJ1_4++;
-				VerBarcoJ1 = 0;
-			}
-			if(BarJ1_1 == 3 || BarJ1_2 ==3 || BarJ1_3 == 3 || BarJ1_4 == 3){
-				CantidadBarcosJ1++;
-			}
-			Turno = 2;
-			Matrix = NuevoTablero(Matrix, i, j, size);
-			ImpTablero(Matrix, 0, 0, size, size);
 		}//ifJ1
 	       
 		if(Turno == 2){
@@ -100,32 +105,37 @@ int main(){
 			cin>>i;
 			cout<<"Ingrese Coordenada j: ";
 			cin>>j;
-			bool VerCoor2 = VerificarCoordenada(MatrixJ2, i, j, size);
-			if(VerCoor2 == true){
-				cout<<"Ha Disparado en una Parte de Barco"<<endl;
+			if(i>7 || j>7){
+				cout<<"Fuera de Rango"<<endl;
 			}else{
-				cout<<"Ha Fallado"<<endl;
-			}
-			VerBarcoJ2 = VerificarBarcoJ2(MatrixJ2, i, j, size);
-			if(VerBarcoJ2 == 1){
-				BarJ2_1++;
-				VerBarcoJ2 = 0;
-			}else if(VerBarcoJ2 == 2){
-				BarJ2_2++;
-				VerBarcoJ2 = 0;
-			}else if(VerBarcoJ2 == 3){
-				BarJ2_3++;
-				VerBarcoJ2 = 0;
-			}else if(VerBarcoJ2 == 4){
-				BarJ2_4++;
-				VerBarcoJ2 = 0;
-			}
-			if(BarJ2_1 == 3 || BarJ2_2 ==3 || BarJ2_3 == 3 || BarJ2_4 == 3){
-				CantidadBarcosJ2++;
-			}
-			Turno = 1;
-			Matrix2 = NuevoTablero(Matrix2, i, j, size);
-			ImpTablero(Matrix2, 0, 0, size, size);	
+				
+				bool VerCoor2 = VerificarCoordenada(MatrixJ2, i, j, size);
+				if(VerCoor2 == true){
+					cout<<"Ha Disparado en una Parte de Barco"<<endl;
+				}else{
+					cout<<"Ha Fallado"<<endl;
+				}
+				VerBarcoJ2 = VerificarBarcoJ2(MatrixJ2, i, j, size);
+				if(VerBarcoJ2 == 1){
+					BarJ2_1++;
+					VerBarcoJ2 = 0;
+				}else if(VerBarcoJ2 == 2){
+					BarJ2_2++;
+					VerBarcoJ2 = 0;
+				}else if(VerBarcoJ2 == 3){
+					BarJ2_3++;
+					VerBarcoJ2 = 0;
+				}else if(VerBarcoJ2 == 4){
+					BarJ2_4++;
+					VerBarcoJ2 = 0;
+				}
+				if(BarJ2_1 == 3 || BarJ2_2 ==3 || BarJ2_3 == 3 || BarJ2_4 == 3){
+					CantidadBarcosJ2++;
+				}
+				Turno = 1;
+				Matrix2 = NuevoTablero(Matrix2, i, j, size);
+				ImpTablero(Matrix2, 0, 0, size, size);
+			}	
 		}//ifJ2
 	}//while()
 	return 0;
@@ -225,7 +235,7 @@ char** NuevoTablero(char** tablero, int x, int y, int size){
 	for(int i=0; i<size; i++){
 		for(int j=0; j<size; j++){
 			if(i==x && j==y){
-				tablero[i][j] = '+';
+				tablero[i][j] = 'x';
 			}
 		}//for2()
 	}//for1()
